@@ -1,51 +1,30 @@
-# easyExcel-practice
+package org.lyflexi.customeasyexcelframework.commonApi.resolver;
 
-抽象类常用于骨架设计，提供一组通用的公共方法。
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.lyflexi.customeasyexcelframework.commonApi.aware.IExcelRowInfoAware;
+import org.lyflexi.customeasyexcelframework.commonApi.result.Result;
+import org.lyflexi.customeasyexcelframework.commonApi.utils.ExcelExportUtil;
+import org.lyflexi.customeasyexcelframework.commonApi.utils.ExcelImportUtil;
+import org.lyflexi.customeasyexcelframework.commonApi.vo.ExcelErrorResultVo;
+import org.lyflexi.customeasyexcelframework.commonApi.exception.LyflexiErrorType;
+import org.springframework.web.multipart.MultipartFile;
 
-但是抽象类的定义中是存在，未被实现的abstract方法待子类去实现，那么这些abstract方法和Interface中的接口方法在设计上有什么区别呢？
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-这是接口和抽象类的区别，应该没有异议：
-
-> 接口：更倾向于表示能力或行为的集合，强调的是“能做什么”。
-> 
-> 抽象类：更倾向于表示一个具体的概念，给出初版的接口实现，强调的是“是什么”
-
-但是，依旧没有解释Abstract类中的abstract方法和Interface中的接口方法在设计上有什么区别呢？下面我个人一言以蔽之：
-- Interface中的接口方法用于对外部提供访问的途径
-- Abstract类中的abstract方法用于对内提供实现的途径
-
-具体而言，看如下的设计思想：
-
-对外提供ExcelResolver接口：[ExcelResolver.java](custom-easyExcel-framework%2Fsrc%2Fmain%2Fjava%2Forg%2Flyflexi%2Fcustomeasyexcelframework%2FcommonApi%2Fresolver%2FExcelResolver.java)ExcelResolver
-
-```java
-public interface ExcelResolver<E> {
-    /**
-     * 导入数据
-     * @param request
-     * @param response
-     * @param file
-     * @param clazz
-     * @param excelImportUtil
-     * @return
-     */
-    Result<?> importData(HttpServletRequest request, HttpServletResponse response, MultipartFile file,
-                         Class<E> clazz, ExcelImportUtil<E, E> excelImportUtil);
-    /**
-     * excel导出数据
-     * @param param
-     * @param clazz
-     * @param response
-     * @param excelImportUtil
-     */
-    Result<String> exportData(HttpServletResponse response, HashMap<String, Object> param, Class<E> clazz,
-                              ExcelExportUtil<E, E> excelImportUtil);
-}
-
-```
-
-抽象类AbstractExcelResolver实现上述接口：[AbstractExcelResolver.java](custom-easyExcel-framework%2Fsrc%2Fmain%2Fjava%2Forg%2Flyflexi%2Fcustomeasyexcelframework%2FcommonApi%2Fresolver%2FAbstractExcelResolver.java)
-```java
+/**
+ * @Description:
+ * @Author: lyflexi
+ * @project: easyExcel-practice
+ * @Date: 2024/9/4 17:23
+ */
 @Slf4j
 public abstract class AbstractExcelResolver<E extends IExcelRowInfoAware> implements ExcelResolver<E> {
     /**
@@ -161,12 +140,3 @@ public abstract class AbstractExcelResolver<E extends IExcelRowInfoAware> implem
         return errorResultVoList;
     }
 }
-
-```
-
-在抽象类AbstractExcelResolver实现ExcelResolver接口的时候，抽取了三个方法：
-- abstract retriveDataForExport
-- abstract convertDataForImport
-- abstract saveAllDataForImport
-
-因此这三个方法就是对内的抽象方法，这就是抽象方法与ExcelResolver接口方法的设计区别
