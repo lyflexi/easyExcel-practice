@@ -127,7 +127,9 @@ public class TestExcelResolver extends AbstractExcelResolver<TestExcelEntity> {
 //                    }
 //                });
 //            }
+            toSaveList.addAll(excelList);
         }
+
         return errorList;
     }
 
