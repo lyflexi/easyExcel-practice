@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.lyflexi.customeasyexcelframework.commonApi.entity.TestExcelEntity;
 import org.lyflexi.customeasyexcelframework.commonApi.entity.TestExcelParam;
 import org.lyflexi.customeasyexcelframework.commonApi.resolver.AbstractExcelResolver;
-import org.lyflexi.customeasyexcelframework.commonApi.service.ITestExcelService;
+import org.lyflexi.customeasyexcelframework.biz.service.ITestExcelService;
 import org.lyflexi.customeasyexcelframework.commonApi.utils.SpringUtils;
 import org.lyflexi.customeasyexcelframework.commonApi.vo.ExcelErrorResultVo;
 

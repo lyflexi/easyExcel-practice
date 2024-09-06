@@ -1,8 +1,8 @@
-package org.lyflexi.customeasyexcelframework.commonApi.service.impl;
+package org.lyflexi.customeasyexcelframework.biz.service.impl;
 
 import org.lyflexi.customeasyexcelframework.commonApi.entity.TestExcelEntity;
 import org.lyflexi.customeasyexcelframework.commonApi.entity.TestExcelParam;
-import org.lyflexi.customeasyexcelframework.commonApi.service.ITestExcelService;
+import org.lyflexi.customeasyexcelframework.biz.service.ITestExcelService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

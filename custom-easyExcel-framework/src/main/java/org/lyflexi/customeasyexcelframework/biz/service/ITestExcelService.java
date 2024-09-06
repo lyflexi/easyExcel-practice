@@ -1,4 +1,4 @@
-package org.lyflexi.customeasyexcelframework.commonApi.service;
+package org.lyflexi.customeasyexcelframework.biz.service;
 
 import org.lyflexi.customeasyexcelframework.commonApi.entity.TestExcelEntity;
 import org.lyflexi.customeasyexcelframework.commonApi.entity.TestExcelParam;
