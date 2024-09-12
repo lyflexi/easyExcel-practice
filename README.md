@@ -1,5 +1,41 @@
 # easyExcel-practice
 
+# 可配置化
+需求：我们希望在Controller层只做1组导入导出接口，适配无数的Web页面，这样的好处是避免Controller层的导入导出接口泛滥
+
+思路：对于每个Web页面的导入导出逻辑，根据请求传参type的不同，后台都有相应的解析器Resolver来处理
+
+接下来有两种设计思路：
+## 设计方案1：
+实现出所有页面导入导出对应的，并打上@Component注解，初始化项目阶段装载所有的的Resolver实例至IOC容器
+
+为了做到配置化，我们需要提前准备好所有的[请求参数type，对应Resolver实例名称]的枚举信息Enum
+
+在导入导出的逻辑中，根据请求参数type，通过Spring-API来获取对应BeanName的Resolver来处理任务
+
+这种方式的优点是任务执行之前Resolver就已经实例化好了，缺点是一开始就实例化全部的Resolver会耗更多的内存
+## 设计方案2：
+依然是为了做到配置化，我们需要提前准备好所有的[type，对应解析器Resolver.class]的枚举信息，
+```java
+TEST_EXCEL("testExcel", TestExcelEntity.class, TestExcelResolver.class, "template\\testExcel.xlsx"),
+NONE("not_exist_type", null, null, null);
+```
+
+与方案1不同的地方是，只编写好页面导入导出对应的解析器Resolver，但不是将所有的Resolver一股脑全实例化到Spring容器中，而是在请求到来之后根据请求参数type，获取指定的Resolver.class对象，然后和SpringIOC一样的实现思路，手动通过反射机制创建出该Resolver的实例对象，来处理具体的导入导出任务
+
+这种方式的优点是每次按需创建Resolver实例比较节省内存，缺点是在请求到来之后再通过反射实例化Resolver效率会比较低
+
+总的来说，任何设计方案乃至架构，到最后都是性能和内存之间的一种取舍（升华了，哈哈哈）
+
+对于本项目来说，只是为了让大家学习设计思想，因此用哪种方案都可以.
+
+最终本项目仅以方案2为例来做示范，感兴趣的朋友也可以借鉴本项目的代码与工程结构，对方案1做出实现
+
+在吃透了任意一种方案之后，另一种思路实现起来应该就不难了
+
+
+# 设计模式分析
+
 抽象类常用于骨架设计，提供一组通用的公共方法。
 
 但是抽象类的定义中是存在，未被实现的abstract方法待子类去实现，那么这些abstract方法和Interface中的接口方法在设计上有什么区别呢？
