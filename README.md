@@ -13,7 +13,7 @@
 
 在导入导出的逻辑中，根据请求参数type，通过Spring-API来获取对应BeanName的Resolver来处理任务
 
-这种方式的优点是任务执行之前Resolver就已经实例化好了，缺点是一开始就实例化全部的Resolver会耗更多的内存
+这种方式的优点是任务执行之前Resolver就已经实例化好了，缺点是要在项目启动阶段就就创建全部的Resolver实例会耗更多的内存
 ## 设计方案2：
 依然是为了做到配置化，我们需要提前准备好所有的[type，对应解析器Resolver.class]的枚举信息，
 ```java
