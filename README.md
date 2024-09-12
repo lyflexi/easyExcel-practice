@@ -200,7 +200,7 @@ public abstract class AbstractExcelResolver<E extends IExcelRowInfoAware> implem
 
 ```
 
-在抽象类AbstractExcelResolver实现ExcelResolver接口的时候，抽取了三个方法：
+在抽象类AbstractExcelResolver实现ExcelResolver接口的时候，抽取或者叫新增了三个方法：
 - abstract retriveDataForExport
 - abstract convertDataForImport
 - abstract saveAllDataForImport
