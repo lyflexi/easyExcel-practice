@@ -21,7 +21,7 @@ TEST_EXCEL("testExcel", TestExcelEntity.class, TestExcelResolver.class, "templat
 NONE("not_exist_type", null, null, null);
 ```
 
-与方案1不同的地方是，只编写好页面导入导出对应的解析器Resolver，但不是将所有的Resolver一股脑全实例化到Spring容器中，而是在请求到来之后根据请求参数type，获取指定的Resolver.class对象，然后和SpringIOC一样的实现思路，手动通过反射机制创建出该Resolver的实例对象，来处理具体的导入导出任务
+与方案1不同的地方是，只编写好页面导入导出对应的解析器Resolver，但不是将所有的Resolver一股脑全实例化到Spring容器中，而是在请求到来之后根据请求参数type，获取指定的Resolver.class对象，然后和SpringIOC一样的实现原理，手动通过反射机制创建出该Resolver的实例对象，来处理具体的导入导出任务
 
 这种方式的优点是每次按需创建Resolver实例比较节省内存，缺点是在请求到来之后再通过反射实例化Resolver效率会比较低
 
