@@ -28,7 +28,8 @@
     </scm>
     <packaging>pom</packaging>
     <modules>
-        <module>custom-easyExcel-framework</module>
+        <module>custom-framework-reflect</module>
+        <module>custom-framework-spring</module>
     </modules>
     <properties>
         <java.version>17</java.version>
@@ -101,7 +102,12 @@
             <artifactId>javax.el</artifactId>
             <version>${glassfish.javax.el.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

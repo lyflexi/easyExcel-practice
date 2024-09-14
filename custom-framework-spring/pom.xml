@@ -8,10 +8,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>org.lyflexi</groupId>
-    <artifactId>custom-easyExcel-framework</artifactId>
+    <artifactId>custom-framework-spring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>custom-easyExcel-framework</name>
-    <description>custom-easyExcel-framework</description>
+    <name>custom-framework-spring</name>
+    <description>custom-framework-spring</description>
     <url/>
     <licenses>
         <license/>
@@ -30,12 +30,6 @@
     </properties>
     <dependencies>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>
